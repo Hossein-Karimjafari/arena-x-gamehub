@@ -1,0 +1,264 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// NOTE: SQLite does not support Prisma enums; string values are validated
+// at the application layer via zod (src/lib/validation.ts).
+
+model User {
+  id               String    @id @default(cuid())
+  name             String?
+  email            String?   @unique
+  username         String?   @unique
+  phone            String?   @unique
+  password         String
+  role             String    @default("USER") // USER | OPERATOR | ADMIN
+  balance          Int       @default(0)
+  xp               Int       @default(0)
+  level            Int       @default(1)
+  referralCode     String    @unique @default(cuid())
+  referredById     String?
+  resetToken       String?
+  resetTokenExpiry DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  bookings       Booking[]
+  registrations  TournamentRegistration[]
+  reviews        Review[]
+  posts          Post[]
+  notifications  Notification[]
+  walletTx       WalletTx[]
+  payments       Payment[]
+  hours          UserHours?
+}
+
+model UserHours {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  remaining Int      @default(0)
+  purchased Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model Game {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  title        String
+  titleEn      String
+  genre        String
+  platform     String // PC | PS5 | XBOX
+  emoji        String   @default("🎮")
+  gradient     String   @default("purple")
+  description  String
+  sysreq       String?
+  rating       Float    @default(0)
+  multiplayer  Boolean  @default(false)
+  players      String   @default("1")
+  popular      Boolean  @default(false)
+  active       Boolean  @default(true)
+  pricePerHour Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  reviews Review[]
+
+  @@index([genre])
+  @@index([platform])
+  @@index([popular])
+}
+
+model Station {
+  id         String   @id @default(cuid())
+  name       String
+  type       String // PC | PS5 | XBOX | VIP
+  specs      String
+  hourlyRate Int
+  active     Boolean  @default(true)
+  online     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  bookings Booking[]
+
+  @@index([type, active])
+}
+
+model Booking {
+  id           String   @id @default(cuid())
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  guestName    String?
+  guestPhone   String?
+  stationId    String
+  station      Station  @relation(fields: [stationId], references: [id], onDelete: Cascade)
+  date         String // YYYY-MM-DD
+  startHour    Int
+  hours        Int
+  totalPrice   Int
+  payMethod    String   @default("onsite") // online | wallet | onsite
+  discountCode String?
+  status       String   @default("CONFIRMED") // PENDING | CONFIRMED | DONE | CANCELLED
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  payments Payment[]
+
+  @@index([stationId, date, status])
+  @@index([userId, status])
+  @@index([createdAt])
+}
+
+model Tournament {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  game        String
+  platform    String
+  emoji       String   @default("🏆")
+  date        DateTime
+  prize       String
+  entryFee    Int
+  capacity    Int
+  teamSize    Int      @default(1)
+  rules       String
+  description String
+  status      String   @default("OPEN") // OPEN | FULL | ONGOING | DONE
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  registrations TournamentRegistration[]
+}
+
+model TournamentRegistration {
+  id           String     @id @default(cuid())
+  tournamentId String
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  userId       String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  teamName     String?
+  contact      String
+  paid         Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+
+  @@unique([tournamentId, userId])
+}
+
+model Plan {
+  id       String  @id @default(cuid())
+  title    String
+  period   String // HOUR | DAY | WEEK | MONTH | VIP
+  price    Int
+  hours    Int
+  features String // JSON array of strings
+  badge    String?
+  popular  Boolean @default(false)
+  order    Int     @default(0)
+  active   Boolean @default(true)
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  gameId    String?
+  game      Game?    @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  target    String   @default("SITE") // SITE | GAME
+  rating    Int
+  comment   String
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([gameId, approved])
+  @@index([userId])
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  excerpt   String
+  content   String
+  category  String
+  emoji     String   @default("📰")
+  authorId  String?
+  author    User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  published Boolean  @default(true)
+  views     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([published])
+}
+
+model Discount {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  percent   Int       @default(0)
+  amount    Int?
+  maxUse    Int       @default(100)
+  used      Int       @default(0)
+  active    Boolean   @default(true)
+  expiresAt DateTime?
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  body      String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId, read])
+}
+
+model WalletTx {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount    Int
+  type      String // TOPUP | PAY | BONUS | REFUND
+  desc      String
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model Payment {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  bookingId String?
+  booking   Booking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+  amount    Int
+  refId     String?
+  authority String?  @unique
+  status    String   @default("PENDING") // PENDING | SUCCESS | FAILED
+  gateway   String   @default("zarinpal-sandbox")
+  desc      String
+  createdAt DateTime @default(now())
+
+  @@index([userId, status])
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  subject   String
+  message   String
+  answered  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([answered])
+}
