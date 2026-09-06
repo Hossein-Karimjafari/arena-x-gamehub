@@ -9,3 +9,6 @@ next-env.d.ts
 *.log
 prisma/dev.db
 prisma/dev.db-journal
+
+.vercel
+.env*
