@@ -8,7 +8,7 @@ export default function TournamentCard({ t }: { t: Tournament }) {
     t.status === "OPEN" ? "!text-neon-green !border-neon-green/40" : t.status === "FULL" ? "!text-neon-red !border-neon-red/40" : "!text-neon-cyan !border-neon-cyan/40";
   return (
     <Link href={`/tournaments/${t.slug}`} className="glass card-hover group block overflow-hidden">
-      <CoverArt emoji={t.emoji} gradient="violet" className="h-40 transition-transform duration-500 group-hover:scale-105" />
+      <CoverArt emoji={t.emoji} src={`/images/tournaments/${t.slug}.jpg`} gradient="violet" className="h-40 transition-transform duration-500 group-hover:scale-105" alt={t.title} />
       <div className="p-4">
         <div className="mb-2 flex items-center justify-between gap-2">
           <h3 className="font-bold text-white group-hover:text-neon-purple transition-colors">{t.title}</h3>

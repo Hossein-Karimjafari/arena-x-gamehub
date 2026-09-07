@@ -1,6 +1,7 @@
 import { SITE } from "@/lib/constants";
 import SectionHeading from "@/components/SectionHeading";
 import CoverArt from "@/components/CoverArt";
+import Image from "next/image";
 import { GALLERY } from "@/lib/constants";
 
 export const metadata = { title: "درباره ما", description: "داستان گیم‌نت آرنا ایکس؛ از یک ایده تا بزرگ‌ترین میدان گیمینگ شرق تهران" };
@@ -38,8 +39,8 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <CoverArt emoji="🏢" gradient="violet" title="سالن اصلی — ۲۰۰ متر" className="h-44 !rounded-2xl" />
-          <CoverArt emoji="🎉" gradient="cyan" title="ایونت شب‌گیم" className="mt-8 h-44 !rounded-2xl" />
+          <CoverArt emoji="🏢" src="/images/about-hall.jpg" gradient="violet" title="سالن اصلی — ۲۰۰ متر" className="h-44 !rounded-2xl" />
+          <CoverArt emoji="🎉" src="/images/about-game-night.jpg" gradient="cyan" title="ایونت شب‌گیم" className="mt-8 h-44 !rounded-2xl" />
         </div>
       </div>
 
@@ -72,12 +73,14 @@ export default function AboutPage() {
       <h2 className="section-title mb-10 text-center neon-text">👥 تیم آرنا</h2>
       <div className="grid gap-5 sm:grid-cols-3">
         {[
-          { name: "کیان احمدی", role: "هم‌بنیان‌گذار و مدیر فنی", emoji: "🧑‍💻" },
-          { name: "پرهام صادقی", role: "هم‌بنیان‌گذار و مدیر مسابقات", emoji: "🏆" },
-          { name: "مائده رستمی", role: "مدیر کافه و تجربه مشتری", emoji: "☕" },
+          { name: "کیان احمدی", role: "هم‌بنیان‌گذار و مدیر فنی", emoji: "🧑‍💻", image: "/images/team-kian.jpg" },
+          { name: "پرهام صادقی", role: "هم‌بنیان‌گذار و مدیر مسابقات", emoji: "🏆", image: "/images/team-parham.jpg" },
+          { name: "مائده رستمی", role: "مدیر کافه و تجربه مشتری", emoji: "☕", image: "/images/team-maede.jpg" },
         ].map((m) => (
           <div key={m.name} className="reveal glass card-hover p-8 text-center">
-            <span className="mx-auto mb-4 grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br from-neon-violet/40 to-neon-cyan/20 text-4xl">{m.emoji}</span>
+            <span className="relative mx-auto mb-4 block h-20 w-20 overflow-hidden rounded-full bg-gradient-to-br from-neon-violet/40 to-neon-cyan/20 text-4xl">
+              <Image src={m.image} alt={m.name} fill sizes="80px" className="object-cover" />
+            </span>
             <h3 className="font-bold text-white">{m.name}</h3>
             <p className="mt-1 text-xs text-slate-400">{m.role}</p>
           </div>
@@ -88,7 +91,7 @@ export default function AboutPage() {
       <h2 className="section-title mb-10 mt-16 text-center neon-text">📷 محیط آرنا</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {GALLERY.map((g) => (
-          <CoverArt key={g.title} emoji={g.emoji} gradient={g.gradient} title={g.title} className="reveal card-hover h-48 !rounded-2xl" />
+          <CoverArt key={g.title} emoji={g.emoji} src={g.image} gradient={g.gradient} title={g.title} className="reveal card-hover h-48 !rounded-2xl" />
         ))}
       </div>
     </div>

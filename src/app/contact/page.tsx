@@ -1,6 +1,8 @@
 import { SITE } from "@/lib/constants";
 import SectionHeading from "@/components/SectionHeading";
+import CoverArt from "@/components/CoverArt";
 import ContactForm from "./ContactForm";
+import { IconInstagram, IconTelegram, IconWhatsApp, IconDiscord } from "@/components/icons";
 
 export const metadata = { title: "تماس با ما", description: "آدرس، تلفن، ساعت کاری و فرم تماس گیم‌نت آرنا ایکس" };
 
@@ -25,12 +27,14 @@ export default function ContactPage() {
             <h3 className="mb-4 font-black text-white">💬 شبکه‌های اجتماعی</h3>
             <div className="flex flex-wrap gap-2">
               {[
-                { href: SITE.socials.instagram, label: "اینستاگرام", icon: "📷" },
-                { href: SITE.socials.telegram, label: "تلگرام", icon: "✈️" },
-                { href: SITE.socials.whatsapp, label: "واتساپ", icon: "💬" },
-                { href: SITE.socials.discord, label: "دیسکورد", icon: "🎧" },
-              ].map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="chip !px-4 !py-2 hover:!border-neon-purple/60">{s.icon} {s.label}</a>
+                { href: SITE.socials.instagram, label: "اینستاگرام", Icon: IconInstagram },
+                { href: SITE.socials.telegram, label: "تلگرام", Icon: IconTelegram },
+                { href: SITE.socials.whatsapp, label: "واتساپ", Icon: IconWhatsApp },
+                { href: SITE.socials.discord, label: "دیسکورد", Icon: IconDiscord },
+              ].map(({ href, label, Icon }) => (
+                <a key={label} href={href} target="_blank" rel="noreferrer" className="chip flex items-center gap-2 !px-4 !py-2 hover:!border-neon-purple/60 hover:!text-white">
+                  <Icon className="h-4 w-4" /> {label}
+                </a>
               ))}
             </div>
           </div>
@@ -47,17 +51,19 @@ export default function ContactPage() {
             </ul>
           </div>
 
-          <div className="glass relative overflow-hidden p-0">
-            <div className="relative grid h-72 place-items-center bg-gradient-to-br from-panel to-ink">
-              <div className="absolute inset-0 opacity-40" style={{ backgroundImage: "repeating-linear-gradient(0deg, rgba(124,58,237,.15) 0 1px, transparent 1px 30px), repeating-linear-gradient(90deg, rgba(124,58,237,.15) 0 1px, transparent 1px 30px)" }} />
-              <div className="relative text-center">
-                <span className="mb-2 inline-block animate-glow text-5xl">📍</span>
-                <p className="font-bold text-white">موقعیت آرنا ایکس روی نقشه</p>
-                <p className="mt-1 text-xs text-slate-400">{SITE.address}</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=35.7560,51.4360" target="_blank" rel="noreferrer" className="btn-outline mt-4 !py-2 !text-xs">نمایش در نقشه گوگل ←</a>
-              </div>
+          <CoverArt
+            emoji="📍"
+            src="/images/contact-map.jpg"
+            gradient="violet"
+            className="h-72 !rounded-xl"
+            alt={`نقشه — ${SITE.address}`}
+          >
+            <div className="absolute inset-x-0 bottom-0 p-4 text-center" style={{ background: "linear-gradient(to top, rgba(0,0,0,.75), transparent)" }}>
+              <p className="font-bold text-white">موقعیت آرنا ایکس روی نقشه</p>
+              <p className="mt-1 text-xs text-slate-300">{SITE.address}</p>
+              <a href="https://www.google.com/maps/search/?api=1&query=35.7560,51.4360" target="_blank" rel="noreferrer" className="btn-outline mt-3 inline-block !py-2 !text-xs">نمایش در نقشه گوگل ←</a>
             </div>
-          </div>
+          </CoverArt>
 
           <div className="glass p-6 text-center">
             <p className="text-sm text-slate-300">پاسخ‌گویی سریع‌تر؟ واتساپ بزن 👇</p>

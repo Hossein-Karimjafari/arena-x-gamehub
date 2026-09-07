@@ -6,7 +6,7 @@ import type { Game } from "@prisma/client";
 export default function GameCard({ game }: { game: Game }) {
   return (
     <Link href={`/games/${game.slug}`} className="glass card-hover group block overflow-hidden">
-      <CoverArt emoji={game.emoji} gradient={game.gradient} className="h-44 transition-transform duration-500 group-hover:scale-105" />
+      <CoverArt emoji={game.emoji} src={`/images/games/${game.slug}.jpg`} gradient={game.gradient} className="h-44 transition-transform duration-500 group-hover:scale-105" alt={game.title} />
       <div className="p-4">
         <div className="mb-2 flex items-start justify-between gap-2">
           <div>

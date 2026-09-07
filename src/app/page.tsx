@@ -59,7 +59,7 @@ export default async function HomePage() {
 
             <div className="relative hidden lg:block">
               <div className="animate-floaty">
-                <CoverArt emoji="🕹️" gradient="violet" className="glass h-80 w-full !rounded-3xl shadow-neon" big />
+                <CoverArt emoji="🕹️" src="/images/hero-arcade.jpg" gradient="violet" className="glass h-80 w-full !rounded-3xl shadow-neon" big alt="سالن گیم‌نت آرنا ایکس" />
               </div>
               <div className="glass animate-floaty absolute -bottom-8 -right-6 w-56 p-4 !rounded-2xl shadow-neon-cyan" style={{ animationDelay: "1.2s" }}>
                 <p className="text-xs text-slate-400">🟢 PC-04 — وارزون</p>
@@ -105,7 +105,7 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {GALLERY.slice(0, 4).map((g, i) => (
-              <CoverArt key={g.title} emoji={g.emoji} gradient={g.gradient} title={g.title} className={`h-36 !rounded-2xl ${i % 2 ? "translate-y-4" : ""}`} />
+              <CoverArt key={g.title} emoji={g.emoji} src={g.image} gradient={g.gradient} title={g.title} className={`h-36 !rounded-2xl ${i % 2 ? "translate-y-4" : ""}`} />
             ))}
           </div>
         </div>
@@ -195,7 +195,7 @@ export default async function HomePage() {
         <SectionHeading kicker="GALLERY" title="نگاهی به آرنا" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {GALLERY.map((g, i) => (
-            <CoverArt key={g.title} emoji={g.emoji} gradient={g.gradient} title={g.title} className="reveal card-hover h-52 !rounded-2xl" big />
+            <CoverArt key={g.title} emoji={g.emoji} src={g.image} gradient={g.gradient} title={g.title} className="reveal card-hover h-52 !rounded-2xl" big />
           ))}
         </div>
       </section>

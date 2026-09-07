@@ -50,7 +50,7 @@ export default async function TournamentDetail({ params }: { params: Promise<{ s
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }} />
       <div className="grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-8">
-          <CoverArt emoji={t.emoji} gradient="violet" className="h-64 !rounded-3xl shadow-neon" big />
+          <CoverArt emoji={t.emoji} src={`/images/tournaments/${t.slug}.jpg`} gradient="violet" className="h-64 !rounded-3xl shadow-neon" big alt={t.title} />
 
           <div>
             <div className="mb-3 flex flex-wrap items-center gap-2">

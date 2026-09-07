@@ -26,7 +26,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         <Link href="/" className="hover:text-neon-purple">خانه</Link> / <Link href="/blog" className="hover:text-neon-purple">اخبار</Link> / <span className="text-slate-300">{post.title}</span>
       </nav>
 
-      <CoverArt emoji={post.emoji} gradient="violet" className="mb-8 h-64 !rounded-3xl shadow-neon" big />
+      <CoverArt emoji={post.emoji} src={`/images/blog/${post.slug}.jpg`} gradient="violet" className="mb-8 h-64 !rounded-3xl shadow-neon" big alt={post.title} />
 
       <span className="chip mb-3 !text-neon-purple">{post.category}</span>
       <h1 className="mb-3 font-display text-3xl font-black leading-snug text-white">{post.title}</h1>

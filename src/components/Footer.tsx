@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { SITE } from "@/lib/constants";
+import { IconInstagram, IconTelegram, IconWhatsApp, IconYouTube, IconDiscord } from "@/components/icons";
 
 export default function Footer() {
   return (
@@ -16,15 +18,15 @@ export default function Footer() {
             </p>
             <div className="mt-4 flex gap-2">
               {[
-                { href: SITE.socials.instagram, label: "اینستاگرام", icon: "📷" },
-                { href: SITE.socials.telegram, label: "تلگرام", icon: "✈️" },
-                { href: SITE.socials.whatsapp, label: "واتساپ", icon: "💬" },
-                { href: SITE.socials.youtube, label: "یوتیوب", icon: "▶️" },
-                { href: SITE.socials.discord, label: "دیسکورد", icon: "🎧" },
-              ].map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noreferrer" title={s.label}
-                  className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/5 text-lg transition-all hover:border-neon-purple/60 hover:shadow-neon">
-                  {s.icon}
+                { href: SITE.socials.instagram, label: "اینستاگرام", Icon: IconInstagram },
+                { href: SITE.socials.telegram, label: "تلگرام", Icon: IconTelegram },
+                { href: SITE.socials.whatsapp, label: "واتساپ", Icon: IconWhatsApp },
+                { href: SITE.socials.youtube, label: "یوتیوب", Icon: IconYouTube },
+                { href: SITE.socials.discord, label: "دیسکورد", Icon: IconDiscord },
+              ].map(({ href, label, Icon }) => (
+                <a key={label} href={href} target="_blank" rel="noreferrer" title={label} aria-label={label}
+                  className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/5 text-slate-300 transition-all hover:border-neon-purple/60 hover:text-white hover:shadow-neon">
+                  <Icon className="h-5 w-5" />
                 </a>
               ))}
             </div>
@@ -58,8 +60,14 @@ export default function Footer() {
           <div>
             <h4 className="mb-4 font-bold text-white">اعتماد شما</h4>
             <div className="flex gap-3">
-              <div className="glass grid h-24 w-24 place-items-center text-center text-[11px] text-slate-400">نماد اعتماد<br />الکترونیکی<br /><span className="text-2xl">🛡️</span></div>
-              <div className="glass grid h-24 w-24 place-items-center text-center text-[11px] text-slate-400">ساماندهی<br />رسانه‌های دیجیتال<br /><span className="text-2xl">🏛️</span></div>
+              <a href="https://trustseal.enamad.ir" target="_blank" rel="noreferrer" title="نماد اعتماد الکترونیکی"
+                className="glass grid h-24 w-24 place-items-center overflow-hidden !rounded-xl transition-opacity hover:opacity-80">
+                <Image src="/images/enamad.png" alt="نماد اعتماد الکترونیکی" width={80} height={80} className="object-contain p-2" />
+              </a>
+              <a href="https://samandehi.ir" target="_blank" rel="noreferrer" title="ساماندهی رسانه‌های دیجیتال"
+                className="glass grid h-24 w-24 place-items-center overflow-hidden !rounded-xl transition-opacity hover:opacity-80">
+                <Image src="/images/samandehi.png" alt="نشان ساماندهی رسانه‌های دیجیتال" width={80} height={80} className="object-contain p-2" />
+              </a>
             </div>
             <p className="mt-4 text-xs text-slate-500">پرداخت امن از طریق درگاه رسمی بانکی</p>
           </div>

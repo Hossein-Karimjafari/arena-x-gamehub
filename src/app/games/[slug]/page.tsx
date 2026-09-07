@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { PLATFORM_FA, toman } from "@/lib/constants";
 import { SITE_URL } from "@/lib/env";
 import CoverArt from "@/components/CoverArt";
+import { IconPlay } from "@/components/icons";
 import StarRating from "@/components/StarRating";
 import ReviewForm from "@/components/ReviewForm";
 
@@ -23,7 +24,8 @@ export default async function GameDetailPage({ params }: { params: Promise<{ slu
   });
   if (!game) notFound();
 
-  const screenshots = ["🎯", "🔥", "💥", "🏆", "🌃", "⚔️"];
+  const shots = ["🎯", "🔥", "💥", "🏆", "🌃", "⚔️"];
+  const screenshots = shots.map((s) => ({ emoji: s, src: `/images/games/${game.slug}.jpg` }));
 
   const gameJsonLd = {
     "@context": "https://schema.org",
@@ -48,10 +50,10 @@ export default async function GameDetailPage({ params }: { params: Promise<{ slu
 
       <div className="grid gap-8 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <CoverArt emoji={game.emoji} gradient={game.gradient} className="h-80 !rounded-3xl shadow-neon" big />
+          <CoverArt emoji={game.emoji} src={`/images/games/${game.slug}.jpg`} gradient={game.gradient} className="h-80 !rounded-3xl shadow-neon" big alt={game.title} />
           <div className="mt-4 grid grid-cols-3 gap-3">
             {screenshots.slice(0, 3).map((s, i) => (
-              <CoverArt key={i} emoji={s} gradient={game.gradient} className="h-24 !rounded-xl opacity-80" />
+              <CoverArt key={i} emoji={s.emoji} src={s.src} gradient={game.gradient} className={`h-24 !rounded-xl ${i === 0 ? "" : "opacity-80"}`} imgStyle={i === 0 ? { objectPosition: "center 20%" } : i === 1 ? { objectPosition: "center 55%" } : { objectPosition: "center bottom" }} />
             ))}
           </div>
         </div>
@@ -85,7 +87,13 @@ export default async function GameDetailPage({ params }: { params: Promise<{ slu
       {/* trailer placeholder */}
       <div className="mt-10">
         <h2 className="section-title mb-6 text-xl">🎬 تریلر</h2>
-        <CoverArt emoji="▶️" gradient={game.gradient} className="flex h-64 !items-center justify-center !rounded-3xl" />
+        <CoverArt emoji="▶️" src={`/images/games/${game.slug}.jpg`} gradient={game.gradient} className="h-64 !rounded-3xl" imgStyle={{ filter: "brightness(.45) blur(1px)" }}>
+          <div className="absolute inset-0 grid place-items-center">
+            <span className="grid h-16 w-16 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur transition-transform hover:scale-110">
+              <IconPlay className="h-7 w-7 translate-x-[-1px]" />
+            </span>
+          </div>
+        </CoverArt>
       </div>
 
       {/* reviews */}

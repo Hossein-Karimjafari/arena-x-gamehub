@@ -31,7 +31,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { q?: s
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((p, i) => (
           <Link key={p.id} href={`/blog/${p.slug}`} className="glass card-hover group overflow-hidden">
-            <CoverArt emoji={p.emoji} gradient={gradients[i % gradients.length]} className="h-40 transition-transform duration-500 group-hover:scale-105" />
+            <CoverArt emoji={p.emoji} src={`/images/blog/${p.slug}.jpg`} gradient={gradients[i % gradients.length]} className="h-40 transition-transform duration-500 group-hover:scale-105" alt={p.title} />
             <div className="p-5">
               <div className="mb-2 flex items-center gap-2 text-[11px] text-slate-500">
                 <span className="chip !py-0.5 !text-[10px] !text-neon-purple">{p.category}</span>
