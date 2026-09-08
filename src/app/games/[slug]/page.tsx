@@ -25,7 +25,7 @@ export default async function GameDetailPage({ params }: { params: Promise<{ slu
   if (!game) notFound();
 
   const shots = ["🎯", "🔥", "💥", "🏆", "🌃", "⚔️"];
-  const screenshots = shots.map((s) => ({ emoji: s, src: `/images/games/${game.slug}.jpg` }));
+  const screenshots = shots.map((s) => ({ emoji: s, src: `/images/games/${game.slug}.webp` }));
 
   const gameJsonLd = {
     "@context": "https://schema.org",
@@ -50,7 +50,7 @@ export default async function GameDetailPage({ params }: { params: Promise<{ slu
 
       <div className="grid gap-8 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <CoverArt emoji={game.emoji} src={`/images/games/${game.slug}.jpg`} gradient={game.gradient} className="h-80 !rounded-3xl shadow-neon" big alt={game.title} />
+          <CoverArt emoji={game.emoji} src={`/images/games/${game.slug}.webp`} gradient={game.gradient} className="h-80 !rounded-3xl shadow-neon" big alt={game.title} />
           <div className="mt-4 grid grid-cols-3 gap-3">
             {screenshots.slice(0, 3).map((s, i) => (
               <CoverArt key={i} emoji={s.emoji} src={s.src} gradient={game.gradient} className={`h-24 !rounded-xl ${i === 0 ? "" : "opacity-80"}`} imgStyle={i === 0 ? { objectPosition: "center 20%" } : i === 1 ? { objectPosition: "center 55%" } : { objectPosition: "center bottom" }} />
@@ -87,7 +87,7 @@ export default async function GameDetailPage({ params }: { params: Promise<{ slu
       {/* trailer placeholder */}
       <div className="mt-10">
         <h2 className="section-title mb-6 text-xl">🎬 تریلر</h2>
-        <CoverArt emoji="▶️" src={`/images/games/${game.slug}.jpg`} gradient={game.gradient} className="h-64 !rounded-3xl" imgStyle={{ filter: "brightness(.45) blur(1px)" }}>
+        <CoverArt emoji="▶️" src={`/images/games/${game.slug}.webp`} gradient={game.gradient} className="h-64 !rounded-3xl" imgStyle={{ filter: "brightness(.45) blur(1px)" }}>
           <div className="absolute inset-0 grid place-items-center">
             <span className="grid h-16 w-16 place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur transition-transform hover:scale-110">
               <IconPlay className="h-7 w-7 translate-x-[-1px]" />

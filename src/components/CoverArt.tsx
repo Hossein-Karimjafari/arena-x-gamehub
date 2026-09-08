@@ -14,6 +14,8 @@ export default function CoverArt({
   imgStyle,
   children,
   alt,
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  priority = false,
 }: {
   emoji: string;
   src?: string;
@@ -24,6 +26,8 @@ export default function CoverArt({
   imgStyle?: CSSProperties;
   children?: ReactNode;
   alt?: string;
+  sizes?: string;
+  priority?: boolean;
 }) {
   const g = GRADIENTS[gradient] ?? GRADIENTS.purple;
   const [failed, setFailed] = useState(false);
@@ -36,9 +40,10 @@ export default function CoverArt({
             src={src as string}
             alt={alt ?? title ?? emoji}
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes={sizes}
             className="object-cover"
             style={imgStyle}
+            priority={priority}
             onError={() => setFailed(true)}
           />
           {children}

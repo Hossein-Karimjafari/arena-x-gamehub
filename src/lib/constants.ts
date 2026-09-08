@@ -32,12 +32,12 @@ export const TESTIMONIALS = [
 ];
 
 export const GALLERY = [
-  { emoji: "🖥️", image: "/images/gallery-pc-lounge.jpg", title: "سالن PC — ۱۲ سیستم RTX", gradient: "purple" },
-  { emoji: "🎮", image: "/images/gallery-console-ps5.jpg", title: "استیشن کنسول PS5", gradient: "cyan" },
-  { emoji: "🛋️", image: "/images/gallery-vip-room.jpg", title: "اتاق تیمی VIP", gradient: "pink" },
-  { emoji: "☕", image: "/images/gallery-cafe.jpg", title: "کافه گیمینگ", gradient: "green" },
-  { emoji: "🏆", image: "/images/gallery-tournament.jpg", title: "مراسم مسابقات", gradient: "violet" },
-  { emoji: "🎧", image: "/images/gallery-streamer.jpg", title: "گوشه استریمرها", gradient: "cyan" },
+  { emoji: "🖥️", image: "/images/gallery-pc-lounge.webp", title: "سالن PC — ۱۲ سیستم RTX", gradient: "purple" },
+  { emoji: "🎮", image: "/images/gallery-console-ps5.webp", title: "استیشن کنسول PS5", gradient: "cyan" },
+  { emoji: "🛋️", image: "/images/gallery-vip-room.webp", title: "اتاق تیمی VIP", gradient: "pink" },
+  { emoji: "☕", image: "/images/gallery-cafe.webp", title: "کافه گیمینگ", gradient: "green" },
+  { emoji: "🏆", image: "/images/gallery-tournament.webp", title: "مراسم مسابقات", gradient: "violet" },
+  { emoji: "🎧", image: "/images/gallery-streamer.webp", title: "گوشه استریمرها", gradient: "cyan" },
 ];
 
 export const WORK_HOURS = Array.from({ length: 16 }, (_, i) => i + 8); // 8:00 تا 23:00

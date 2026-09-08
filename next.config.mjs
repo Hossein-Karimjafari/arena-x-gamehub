@@ -8,11 +8,17 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
-  images: { unoptimized: true },
+  images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [400, 640, 828, 1080, 1200, 1600],
+    imageSizes: [96, 160, 240, 320, 480],
+    minimumCacheTTL: 2678400,
+  },
   async headers() {
     return [
       { source: "/(.*)", headers: securityHeaders },
       { source: "/api/(.*)", headers: [{ key: "Cache-Control", value: "no-store, max-age=0" }] },
+      { source: "/images/(.*)", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
     ];
   },
 };

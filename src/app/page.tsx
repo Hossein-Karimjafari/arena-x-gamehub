@@ -59,7 +59,7 @@ export default async function HomePage() {
 
             <div className="relative hidden lg:block">
               <div className="animate-floaty">
-                <CoverArt emoji="🕹️" src="/images/hero-arcade.jpg" gradient="violet" className="glass h-80 w-full !rounded-3xl shadow-neon" big alt="سالن گیم‌نت آرنا ایکس" />
+                <CoverArt emoji="🕹️" src="/images/hero-arcade.webp" gradient="violet" className="glass h-80 w-full !rounded-3xl shadow-neon" big alt="سالن گیم‌نت آرنا ایکس" sizes="(max-width: 1024px) 100vw, 50vw" priority />
               </div>
               <div className="glass animate-floaty absolute -bottom-8 -right-6 w-56 p-4 !rounded-2xl shadow-neon-cyan" style={{ animationDelay: "1.2s" }}>
                 <p className="text-xs text-slate-400">🟢 PC-04 — وارزون</p>

@@ -53,7 +53,7 @@ export default function ContactPage() {
 
           <CoverArt
             emoji="📍"
-            src="/images/contact-map.jpg"
+            src="/images/contact-map.webp"
             gradient="violet"
             className="h-72 !rounded-xl"
             alt={`نقشه — ${SITE.address}`}

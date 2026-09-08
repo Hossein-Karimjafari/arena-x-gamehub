@@ -62,11 +62,11 @@ export default function Footer() {
             <div className="flex gap-3">
               <a href="https://trustseal.enamad.ir" target="_blank" rel="noreferrer" title="نماد اعتماد الکترونیکی"
                 className="glass grid h-24 w-24 place-items-center overflow-hidden !rounded-xl transition-opacity hover:opacity-80">
-                <Image src="/images/enamad.png" alt="نماد اعتماد الکترونیکی" width={80} height={80} className="object-contain p-2" />
+                <Image src="/images/enamad.webp" alt="نماد اعتماد الکترونیکی" width={80} height={80} className="object-contain p-2" />
               </a>
               <a href="https://samandehi.ir" target="_blank" rel="noreferrer" title="ساماندهی رسانه‌های دیجیتال"
                 className="glass grid h-24 w-24 place-items-center overflow-hidden !rounded-xl transition-opacity hover:opacity-80">
-                <Image src="/images/samandehi.png" alt="نشان ساماندهی رسانه‌های دیجیتال" width={80} height={80} className="object-contain p-2" />
+                <Image src="/images/samandehi.webp" alt="نشان ساماندهی رسانه‌های دیجیتال" width={80} height={80} className="object-contain p-2" />
               </a>
             </div>
             <p className="mt-4 text-xs text-slate-500">پرداخت امن از طریق درگاه رسمی بانکی</p>

@@ -39,8 +39,8 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4">
-          <CoverArt emoji="🏢" src="/images/about-hall.jpg" gradient="violet" title="سالن اصلی — ۲۰۰ متر" className="h-44 !rounded-2xl" />
-          <CoverArt emoji="🎉" src="/images/about-game-night.jpg" gradient="cyan" title="ایونت شب‌گیم" className="mt-8 h-44 !rounded-2xl" />
+          <CoverArt emoji="🏢" src="/images/about-hall.webp" gradient="violet" title="سالن اصلی — ۲۰۰ متر" className="h-44 !rounded-2xl" />
+          <CoverArt emoji="🎉" src="/images/about-game-night.webp" gradient="cyan" title="ایونت شب‌گیم" className="mt-8 h-44 !rounded-2xl" />
         </div>
       </div>
 
@@ -73,9 +73,9 @@ export default function AboutPage() {
       <h2 className="section-title mb-10 text-center neon-text">👥 تیم آرنا</h2>
       <div className="grid gap-5 sm:grid-cols-3">
         {[
-          { name: "کیان احمدی", role: "هم‌بنیان‌گذار و مدیر فنی", emoji: "🧑‍💻", image: "/images/team-kian.jpg" },
-          { name: "پرهام صادقی", role: "هم‌بنیان‌گذار و مدیر مسابقات", emoji: "🏆", image: "/images/team-parham.jpg" },
-          { name: "مائده رستمی", role: "مدیر کافه و تجربه مشتری", emoji: "☕", image: "/images/team-maede.jpg" },
+          { name: "کیان احمدی", role: "هم‌بنیان‌گذار و مدیر فنی", emoji: "🧑‍💻", image: "/images/team-kian.webp" },
+          { name: "پرهام صادقی", role: "هم‌بنیان‌گذار و مدیر مسابقات", emoji: "🏆", image: "/images/team-parham.webp" },
+          { name: "مائده رستمی", role: "مدیر کافه و تجربه مشتری", emoji: "☕", image: "/images/team-maede.webp" },
         ].map((m) => (
           <div key={m.name} className="reveal glass card-hover p-8 text-center">
             <span className="relative mx-auto mb-4 block h-20 w-20 overflow-hidden rounded-full bg-gradient-to-br from-neon-violet/40 to-neon-cyan/20 text-4xl">
